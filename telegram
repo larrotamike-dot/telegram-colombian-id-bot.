@@ -1,0 +1,24 @@
+import telebot
+
+# Replace 'YOUR_BOT_TOKEN' with your actual bot token
+BOT_TOKEN = 'YOUR_BOT_TOKEN'
+bot = telebot.TeleBot(BOT_TOKEN)
+
+@bot.message_handler(commands=['start', 'help'])
+def send_welcome(message):
+    bot.reply_to(message, "Hi there! I'm a bot that can help you search Colombian ID information. Please enter the ID you want to search for.")
+
+@bot.message_handler(func=lambda message: True)
+def echo_all(message):
+    id_number = message.text
+    # Here you would add your ID search logic
+    result = search_colombian_id(id_number)
+    bot.reply_to(message, result)
+
+def search_colombian_id(id_number):
+    # Placeholder function for searching Colombian ID information
+    # Implement your actual logic here
+    return f"Information for ID {id_number}: [insert details here]"
+
+if __name__ == '__main__':
+    bot.polling()
